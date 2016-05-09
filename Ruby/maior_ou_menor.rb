@@ -1,24 +1,31 @@
-puts "Bem vindo ao jogo da adivinhaÃ§Ã£o"
-puts "Qual Ã© o seu nome?"
+# encoding: ISO-8859-1
+puts "Bem vindo ao jogo da adivinhação"
+puts "Qual é o seu nome?"
 nome = gets
 
 puts "\n\n\n\n\n\n"
-puts "ComeÃ§aremos o jogo para vocÃª, " + nome
+puts "Começaremos o jogo para você, " + nome
 
-puts "Escolhendo um nÃºmero secreto entre 0 e 200..."
+puts "Escolhendo um número secreto entre 0 e 200..."
 numero_secreto = 175
-puts "Escolhido... Adivinhe o nÃºmero secreto!"
+puts "Escolhido... Adivinhe o número secreto!"
 
 puts "\n\n\n\n\n"
 puts "Tentativa 1"
-puts "Entre com um nÃºmero"
+puts "Entre com um número"
 chute = gets
-puts "SerÃ¡ que acertou? VocÃª chutou " + chute
+puts "Será que acertou? Você chutou " + chute
 
 acertou = chute.to_i == numero_secreto
 
 if acertou
   puts "Acertou!"
 else
-  puts "Errou!"
+  maior = numero_secreto > chute.to_i
+
+  if maior
+    puts "O número secreto é maior!"
+  else
+    puts "O número secreto é menor!"
+  end
 end
