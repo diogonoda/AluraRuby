@@ -54,9 +54,9 @@ numero_secreto = sorteia_numero_secreto
 limite_de_tentativas = 5
 
 for tentativa in 1..limite_de_tentativas
-  chute = pede_um_numero(tentativa, limite_de_tentativas)
+  chute = pede_um_numero tentativa, limite_de_tentativas
 
-  if verifica_se_acertou(chute, numero_secreto)
+  if verifica_se_acertou chute, numero_secreto
     break
   end
 end
