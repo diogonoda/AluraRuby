@@ -1,0 +1,7 @@
+#lista as gems com o nome informado
+gem list <gem_name>
+ex.: gem list bundler
+
+#desinstala uma versão específica da gem
+gem uninstall <gem_name> -v <gem_version>
+ex.: gem uninstall bundler -v 1.12.1
