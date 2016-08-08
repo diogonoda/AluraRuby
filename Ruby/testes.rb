@@ -5,8 +5,10 @@
 #  puts "Contando " + dedos.to_s
 #end
 
-chutes = [176, 100, 130, 150, 175]
+#chutes = [176, 100, 130, 150, 175]
+#
+#for chute in chutes
+#  puts chute
+#end
 
-for chute in chutes
-  puts chute
-end
+puts "Diogo".strip
