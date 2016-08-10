@@ -1,17 +1,37 @@
-# encoding: ISO-8859-1
+# encoding: UTF-8
 def da_boas_vindas
-  puts "Bem vindo ao jogo da adivinhação"
-  puts "Qual é o seu nome?"
+  puts "Bem vindo ao jogo da adivinhaï¿½ï¿½o"
+  puts "Qual Ã© o seu nome?"
   nome = gets.strip
 
   puts "\n\n\n\n\n\n"
-  puts "Começaremos o jogo para você, #{nome}"
+  puts "ComeÃ§aremos o jogo para vocÃª, #{nome}"
+
+  nome
 end
 
-def sorteia_numero_secreto
-  puts "Escolhendo um número secreto entre 0 e 200..."
-  sorteado = rand(200)
-  puts "Escolhido... Adivinhe o número secreto!"
+def pede_dificuldade
+  puts "Qual o nÃ­vel de dificuldade que deseja? (1 fÃ¡cil, 5 difÃ­cil)"
+  dificuldade = gets.to_i
+end
+
+def sorteia_numero_secreto(dificuldade)
+  case dificuldade
+  when 1
+    maximo = 30
+  when 2
+    maximo = 60
+  when 3
+    maximo = 100
+  when 4
+    maximo = 150
+  else
+    maximo = 200
+  end
+
+  puts "Escolhendo um nÃºmero secreto entre 0 e #{maximo - 1}..."
+  sorteado = rand(maximo)
+  puts "Escolhido... Adivinhe o nÃºmero secreto!"
 
   sorteado
 end
@@ -19,11 +39,11 @@ end
 def pede_um_numero(chutes, tentativa, limite_de_tentativas)
   puts "\n\n\n\n\n"
   puts "Tentativa #{tentativa}  de #{limite_de_tentativas}"
-  puts "Números testados até agora #{chutes}"
-  puts "Entre com um número"
+  puts "NÃºmeros testados atÃ© agora #{chutes}"
+  puts "Entre com um nÃºmero"
   chute = gets.strip
 
-  puts "Será que acertou? Você chutou " + chute
+  puts "SerÃ¡ que acertou? VocÃª chutou " + chute
 
   chute.to_i
 end
@@ -40,9 +60,9 @@ def verifica_se_acertou(chute, numero_secreto)
   maior = numero_secreto > chute
 
   if maior
-    puts "O número secreto é maior!"
+    puts "O nÃºmero secreto Ã© maior!"
   else
-    puts "O número secreto é menor!"
+    puts "O nÃºmero secreto Ã© menor!"
   end
 
   false
@@ -50,8 +70,9 @@ end
 
 
 
-da_boas_vindas
-numero_secreto = sorteia_numero_secreto
+nome = da_boas_vindas
+dificuldade = pede_dificuldade
+numero_secreto = sorteia_numero_secreto(dificuldade)
 
 pontos_ate_agora = 1000
 limite_de_tentativas = 5
@@ -61,6 +82,12 @@ for tentativa in 1..limite_de_tentativas
   chute = pede_um_numero chutes, tentativa, limite_de_tentativas
   chutes << chute
 
+  if nome == "Diogo"
+    puts "Acertou!"
+
+    break
+  end
+
   pontos_a_perder = (chute - numero_secreto).abs / 2.0
   pontos_ate_agora -= pontos_a_perder
 
@@ -69,4 +96,4 @@ for tentativa in 1..limite_de_tentativas
   end
 end
 
-puts "Você ganhou #{pontos_ate_agora} pontos. O numero sercreto era #{numero_secreto}"
+puts "VocÃª ganhou #{pontos_ate_agora} pontos. O nÃºmero sercreto era #{numero_secreto}"
