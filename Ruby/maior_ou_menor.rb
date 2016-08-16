@@ -1,6 +1,6 @@
 # encoding: UTF-8
 def da_boas_vindas
-  puts "Bem vindo ao jogo da adivinha��o"
+  puts "Bem vindo ao jogo da adivinhação"
   puts "Qual é o seu nome?"
   nome = gets.strip
 
@@ -29,8 +29,8 @@ def sorteia_numero_secreto(dificuldade)
     maximo = 200
   end
 
-  puts "Escolhendo um número secreto entre 0 e #{maximo - 1}..."
-  sorteado = rand(maximo)
+  puts "Escolhendo um número secreto entre 1 e #{maximo}..."
+  sorteado = rand(maximo) + 1
   puts "Escolhido... Adivinhe o número secreto!"
 
   sorteado
@@ -68,32 +68,51 @@ def verifica_se_acertou(chute, numero_secreto)
   false
 end
 
+def joga(nome, dificuldade)
+  numero_secreto = sorteia_numero_secreto(dificuldade)
 
+  pontos_ate_agora = 1000
+  limite_de_tentativas = 5
+  chutes = []
+
+  for tentativa in 1..limite_de_tentativas
+    chute = pede_um_numero chutes, tentativa, limite_de_tentativas
+    chutes << chute
+
+    if nome == "Diogo"
+      puts "Acertou!"
+
+      break
+    end
+
+    pontos_a_perder = (chute - numero_secreto).abs / 2.0
+    pontos_ate_agora -= pontos_a_perder
+
+    if verifica_se_acertou chute, numero_secreto
+      break
+    end
+  end
+
+  puts "Você ganhou #{pontos_ate_agora} pontos. O número sercreto era #{numero_secreto}"
+end
+
+def nao_quer_jogar?
+  puts "Deseja jogar novamente? (S/N)"
+  quero_jogar = gets.strip
+
+  nao_quer_jogar = quero_jogar.upcase == "N"
+end
 
 nome = da_boas_vindas
 dificuldade = pede_dificuldade
-numero_secreto = sorteia_numero_secreto(dificuldade)
 
-pontos_ate_agora = 1000
-limite_de_tentativas = 5
-chutes = []
+#do joga nome, dificuldade
+#  while quer_jogar
 
-for tentativa in 1..limite_de_tentativas
-  chute = pede_um_numero chutes, tentativa, limite_de_tentativas
-  chutes << chute
+loop do
+  joga nome, dificuldade
 
-  if nome == "Diogo"
-    puts "Acertou!"
-
-    break
-  end
-
-  pontos_a_perder = (chute - numero_secreto).abs / 2.0
-  pontos_ate_agora -= pontos_a_perder
-
-  if verifica_se_acertou chute, numero_secreto
+  if nao_quer_jogar?
     break
   end
 end
-
-puts "Você ganhou #{pontos_ate_agora} pontos. O número sercreto era #{numero_secreto}"
