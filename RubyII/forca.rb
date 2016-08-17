@@ -45,6 +45,39 @@ def joga(nome)
     chute = pede_um_chute chutes, erros
     chutes << chute
 
+    chutou_uma_letra = chute.size == 1
+
+    if chutou_uma_letra
+      palavra_secreta
+
+      letra_procurada = chute[0]
+
+      total_encontrado = palavra_secreta.count letra_procurada
+
+      if total_encontrado == 0
+        puts "Letra não encontrada"
+
+        erros += 1
+      else
+        puts "Letra encontrada #{total_encontrado} vezes"
+      end
+    else
+      acertou = chute == palavra_secreta
+
+      if acertou
+        puts "Parabéns! Acertou!"
+
+        pontos_ate_agora += 100
+
+        break
+      else
+        puts "Que pena! Errou!"
+
+        pontos_ate_agora -= 30
+
+        erros += 1
+      end
+    end
     #Verifica se acertou ou errou
   end
 
