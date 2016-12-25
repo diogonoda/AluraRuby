@@ -19,6 +19,14 @@ class Heroi
     novo_heroi
   end
 
+  def remove_do(mapa)
+    mapa[linha][coluna] = " "
+  end
+
+  def coloca_no(mapa)
+    mapa[linha][coluna] = "H"    
+  end
+
   def to_array
     [linha, coluna]
   end
